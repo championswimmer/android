@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
+import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.ContentViewEvent;
 import com.crashlytics.android.answers.CustomEvent;
@@ -214,7 +215,8 @@ public class SpaceActivity extends BaseActivity {
                 .doOnError(new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        Toast.makeText(SpaceActivity.this, "No internet / Corrupt data received", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(SpaceActivity.this, "No internet / Corrupt data received", Toast.LENGTH_SHORT).show();
+                        Crashlytics.getInstance().core.logException(throwable);
                     }
                 })
                 .subscribe(new Subscriber<Metadata>() {
